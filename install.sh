@@ -1,6 +1,6 @@
 #!/bin/bash
 DEFAULT_VERSION="1.20.12"
-DEFAULT_GAME_DIR="$HOME/.local"
+DEFAULT_GAME_DIR="$HOME/.local/share"
 DEFAULT_GAME_DATA_DIR="$HOME/.config/VintagestoryData"
 
 if [ "$INTERACTIVE" == "1" ]; then
@@ -89,7 +89,7 @@ cat > $HOME/.local/share/applications/vintagestory.desktop <<DESKTOP
 Categories=Game;
 Comment=Wilderness survival sandbox game
 Encoding=UTF-8
-Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" ${GAME_DIR}/vintagestory/run.sh --dataPath ${GAME_DATA_DIR}
+Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" ${GAME_DIR}/vintagestory/run.sh --dataPath "${GAME_DATA_DIR}"
 GenericName=Vintage Story
 Icon=${GAME_DIR}/vintagestory/assets/gameicon.xpm
 Name=Vintage Story
