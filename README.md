@@ -25,7 +25,7 @@ curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/
 | :----: | --- | --- |
 | `VERSION` | Set game version | 1.20.12 |
 | `GAME_DIR` | Set game install directory | $HOME/.local |
-| `GAME_DATA` | Set game data directory | $HOME/.local |
+| `GAME_DATA` | Set game data directory | $HOME/.config |
 | `INTERACTIVE` | set `1` to interactive setup | |
 
 ### Uninstall
@@ -36,7 +36,9 @@ right click on shortcut icon: "Uninstall"
 Open Powershell and execute:
 ```powershell
 #$env:VERSION="x.x.x" #set specific version
-#$env:GAMEDIR="X:\path\to\install" #set specific version
+#$env:GAME_DIR="X:\path\to\install" #set specific version
+#$env:GAME_DATA="/path/to/data" #set specific game data directory
+#$env:INTERACTIVE=1 #set "1" to interactive setup
 Invoke-Expression (new-object Net.Webclient).DownloadString('https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/refs/heads/main/install.ps1')
 ```
 
@@ -45,4 +47,6 @@ Invoke-Expression (new-object Net.Webclient).DownloadString('https://raw.githubu
 | variables | Function | Default |
 | :----: | --- | --- |
 | `$env:VERSION` | Set game version | 1.20.12 |
-| `$env:GAMEDIR` | Set game directory install | $env:APPDATA |
+| `$env:GAME_DIR` | Set game install directory | $env:APPDATA |
+| `$env:GAME_DATA` | Set game data directory | $env:APPDATA |
+| `$env:INTERACTIVE` | set `1` to interactive setup | |
