@@ -72,10 +72,16 @@ mkdir -p "$GAME_DIR/vintagestory/dotnet"
 cd "$GAME_DIR/vintagestory/dotnet"
 
 #download .NET
+if [[ $(uname -m) == "aarch64" ]]; then
+  ARCH="arm64"
+else
+  ARCH="x64"
+fi
+
 echo "Downloading .NET Runtime ${DOTNET_VERSION}..."
-wget -q https://builds.dotnet.microsoft.com/dotnet/Runtime/${DOTNET_VERSION}/dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
-tar xf dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
-rm -f dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
+wget -q https://builds.dotnet.microsoft.com/dotnet/Runtime/${DOTNET_VERSION}/dotnet-runtime-${DOTNET_VERSION}-linux-${ARCH}.tar.gz
+tar xf dotnet-runtime-${DOTNET_VERSION}-linux-${ARCH}.tar.gz
+rm -f dotnet-runtime-${DOTNET_VERSION}-linux-${ARCH}.tar.gz
 
 
 #uninstaller
