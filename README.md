@@ -31,7 +31,8 @@ right click on shortcut icon: "Uninstall"
 ### Install
 Open Powershell and execute:
 ```powershell
-#$env:version="x.x.x" #set specific version
+#$env:VERSION="x.x.x" #set specific version
+#$env:GAMEDIR="X:\path\to\install" #set specific version
 Invoke-Expression (new-object Net.Webclient).DownloadString('https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/refs/heads/main/install.ps1')
 ```
 
@@ -39,4 +40,5 @@ Invoke-Expression (new-object Net.Webclient).DownloadString('https://raw.githubu
 
 | variables | Function | Default |
 | :----: | --- | --- |
-| `$env:version` | Set game version | 1.20.12 |
+| `$env:VERSION` | Set game version | 1.20.12 |
+| `$env:GAMEDIR` | Set game directory install | $env:APPDATA |
