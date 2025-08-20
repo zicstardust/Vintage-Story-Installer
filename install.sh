@@ -1,8 +1,34 @@
 #!/bin/bash
+DEFAULT_VERSION="1.20.12"
+DEFAULT_GAME_DIR="$HOME/.local"
+DEFAULT_GAME_DATA_DIR="$HOME/.config/VintagestoryData"
 
-set -e
-: "${VERSION:=1.20.12}"
-: "${GAME_DIR:=$HOME/.local}"
+if [ "$INTERACTIVE" == "1" ]; then
+    if [[ -z "$VERSION" ]]; then
+        read -r -p "Which version will be installed [Default: ${DEFAULT_VERSION}]: " VERSION
+    fi
+
+    if [[ -z "$GAME_DIR" ]]; then
+        read -r -p "Installation location [Default: ${DEFAULT_GAME_DIR}]: " GAME_DIR
+    fi
+
+    if [[ -z "$GAME_DATA_DIR" ]]; then
+        read -r -p "Game data location [Default: ${DEFAULT_GAME_DATA_DIR}]: " GAME_DATA_DIR
+    fi
+fi
+
+if [[ -z "$VERSION" ]]; then
+    VERSION=${VERSION:-${DEFAULT_VERSION}}
+fi
+
+if [[ -z "$GAME_DIR" ]]; then
+    GAME_DIR=${GAME_DIR:-${DEFAULT_GAME_DIR}}
+
+fi
+
+if [[ -z "$GAME_DATA_DIR" ]]; then
+    GAME_DATA_DIR=${GAME_DATA_DIR:-${DEFAULT_GAME_DATA_DIR}}
+fi
 
 if awk "BEGIN {exit !($VERSION <= 1.21.0)}"; then
     DOTNET_VERSION="7.0.20"
@@ -63,7 +89,7 @@ cat > $HOME/.local/share/applications/vintagestory.desktop <<DESKTOP
 Categories=Game;
 Comment=Wilderness survival sandbox game
 Encoding=UTF-8
-Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" ${GAME_DIR}/vintagestory/run.sh
+Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" ${GAME_DIR}/vintagestory/run.sh --dataPath ${GAME_DATA_DIR}
 GenericName=Vintage Story
 Icon=${GAME_DIR}/vintagestory/assets/gameicon.xpm
 Name=Vintage Story

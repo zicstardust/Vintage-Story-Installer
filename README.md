@@ -12,7 +12,9 @@ Install any version of vintage story on Linux and Windows with .NET included
 Open any shell and execute:
 ```bash
 #export VERSION="x.x.x" #set specific version
-#export GAME_DIR="/path/to/install" #set specific game directory install
+#export GAME_DIR="/path/to/install" #set specific game install directory
+#export GAME_DATA="/path/to/data" #set specific game data directory
+#export INTERACTIVE=1 #set "1" to interactive setup
 curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh | bash
 ```
 
@@ -22,7 +24,9 @@ curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/
 | variables | Function | Default |
 | :----: | --- | --- |
 | `VERSION` | Set game version | 1.20.12 |
-| `GAME_DIR` | Set game directory install | $HOME/.local |
+| `GAME_DIR` | Set game install directory | $HOME/.local |
+| `GAME_DATA` | Set game data directory | $HOME/.local |
+| `INTERACTIVE` | set `1` to interactive setup | |
 
 ### Uninstall
 right click on shortcut icon: "Uninstall"
