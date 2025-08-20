@@ -1,22 +1,48 @@
 #!/bin/bash
 
 set -e
-: "${DOTNET_VERSION:=7.0.20}"
-: "${GAME_VERSION:=1.20.12}"
+: "${VERSION:=1.20.12}"
 : "${GAME_DIR:=$HOME/.local}"
+
+if awk "BEGIN {exit !($VERSION <= 1.21.0)}"; then
+    DOTNET_VERSION="7.0.20"
+else
+    DOTNET_VERSION="8.0.19"
+fi
+
+STABLE_URL="https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_"
+UNSTABLE_URL="https://cdn.vintagestory.at/gamefiles/unstable/vs_client_linux-x64_"
+
+
+STABLE_FULL_URL="${STABLE_URL}${VERSION}.tar.gz"
+UNSTABLE_FULL_URL="${UNSTABLE_URL}${VERSION}.tar.gz"
+
+
+if wget --spider -q "$STABLE_FULL_URL" 2>/dev/null; then
+    echo "Downloading Vintage Story Server version ${VERSION} from stable..."
+    DOWNLOAD_URL="$STABLE_FULL_URL"
+elif wget --spider -q "$UNSTABLE_FULL_URL" 2>/dev/null; then
+    echo "Downloading Vintage Story Server version ${VERSION} from unstable..."
+    DOWNLOAD_URL="$UNSTABLE_FULL_URL"
+else
+    echo "ERROR: Version ${VERSION} not found in either stable or unstable channels"
+    exit 1
+fi
+
 
 mkdir -p "$GAME_DIR"
 cd "$GAME_DIR"
 
-wget https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_${GAME_VERSION}.tar.gz
-tar xf vs_client_linux-x64_${GAME_VERSION}.tar.gz
-rm -f vs_client_linux-x64_${GAME_VERSION}.tar.gz
+wget -q ${DOWNLOAD_URL}
+tar xzf vs_client_linux-x64_${VERSION}.tar.gz
+rm -f vs_client_linux-x64_${VERSION}.tar.gz
 
 mkdir -p "$GAME_DIR/vintagestory/dotnet"
 cd "$GAME_DIR/vintagestory/dotnet"
 
 #download .NET
-wget https://builds.dotnet.microsoft.com/dotnet/Runtime/${DOTNET_VERSION}/dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
+echo "Downloading .NET Runtime ${DOTNET_VERSION}..."
+wget -q https://builds.dotnet.microsoft.com/dotnet/Runtime/${DOTNET_VERSION}/dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
 tar xf dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
 rm -f dotnet-runtime-${DOTNET_VERSION}-linux-x64.tar.gz
 

@@ -1,5 +1,11 @@
 # Vintage Story Linux Instaler
 
+## Dependencies
+- wget
+- bash
+- tar
+- curl
+- awk
 
 ## Install
 ```bash
@@ -13,6 +19,5 @@ right click on shortcut icon: "Uninstall"
 
 | variables | Function | Default |
 | :----: | --- | --- |
-| `DOTNET_VERSION` | Set .NET Runtime version | 7.0.20 |
-| `GAME_VERSION` | Set game version | 1.20.12 |
+| `VERSION` | Set game version | 1.20.12 |
 | `GAME_DIR` | Set game directory installer | $HOME/.local |
