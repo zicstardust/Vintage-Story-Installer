@@ -59,6 +59,11 @@ fi
 mkdir -p "$GAME_DIR"
 cd "$GAME_DIR"
 
+if [ -d "$GAME_DIR/vintagestory" ]; then
+    echo "Removing existent folder..."
+    rm -Rf "$GAME_DIR/vintagestory"
+fi
+
 wget -q ${DOWNLOAD_URL}
 tar xzf vs_client_linux-x64_${VERSION}.tar.gz
 rm -f vs_client_linux-x64_${VERSION}.tar.gz
@@ -82,6 +87,22 @@ rm -f \$HOME/.local/share/applications/vintagestory.desktop
 UNINSTALLER
 chmod +x "$GAME_DIR/vintagestory/uninstall.sh"
 
+
+#update
+cat > "$GAME_DIR/vintagestory/update.sh" <<UPDATER
+#!/bin/bash
+export INTERACTIVE=1
+curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh | bash
+
+UPDATER
+chmod +x "$GAME_DIR/vintagestory/update.sh"
+
+
+if [ -f "$HOME/.local/share/applications/vintagestory.desktop" ]; then
+    echo "Removing existent shortcut..."
+    rm -f "$HOME/.local/share/applications/vintagestory.desktop"
+fi
+
 #Create desktop shortcut
 mkdir -p $HOME/.local/share/applications/
 cat > $HOME/.local/share/applications/vintagestory.desktop <<DESKTOP
@@ -97,10 +118,14 @@ NoDisplay=false
 Path=${GAME_DIR}/vintagestory
 StartupNotify=true
 Terminal=false
-Actions=Uninstall;
+Actions=Uninstall;Update;
 [Desktop Action Uninstall]
 Name=Uninstall
 Exec=${GAME_DIR}/vintagestory/uninstall.sh
+[Desktop Action Update]
+Name=Update/Change Version
+Exec=${GAME_DIR}/vintagestory/update.sh
+Terminal=true
 DESKTOP
 
 
