@@ -9,7 +9,7 @@
 
 ## Install
 ```bash
-curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Linux-Instaler/main/install.sh | bash
+curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Linux-Installer/main/install.sh | bash
 ```
 
 ## Uninstall
