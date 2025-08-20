@@ -1,24 +1,42 @@
-# Vintage Story Linux Installer
-Install any version of vintage story on linux with .NET included
+# Vintage Story Installer
+Install any version of vintage story on Linux and Windows with .NET included
 
-## Dependencies
+## Linux
+### Dependencies
 - wget
 - bash
 - tar
 - curl
 - awk
-
-## Install
+### Install
+Open any shell and execute:
 ```bash
-curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Linux-Installer/main/install.sh | bash
+#export VERSION="x.x.x" #set specific version
+#export GAME_DIR="/path/to/install" #set specific game directory install
+curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh | bash
 ```
 
-## Uninstall
-right click on shortcut icon: "Uninstall"
 
-## Environment variables
+### Environment variables
 
 | variables | Function | Default |
 | :----: | --- | --- |
 | `VERSION` | Set game version | 1.20.12 |
-| `GAME_DIR` | Set game directory installer | $HOME/.local |
+| `GAME_DIR` | Set game directory install | $HOME/.local |
+
+### Uninstall
+right click on shortcut icon: "Uninstall"
+
+## Windows
+### Install
+Open Powershell and execute:
+```powershell
+#$env:version="x.x.x" #set specific version
+Invoke-Expression (new-object Net.Webclient).DownloadString('https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/refs/heads/main/install.ps1')
+```
+
+### Environment variables
+
+| variables | Function | Default |
+| :----: | --- | --- |
+| `$env:version` | Set game version | 1.20.12 |

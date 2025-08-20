@@ -19,10 +19,10 @@ UNSTABLE_FULL_URL="${UNSTABLE_URL}${VERSION}.tar.gz"
 
 
 if wget --spider -q "$STABLE_FULL_URL" 2>/dev/null; then
-    echo "Downloading Vintage Story Server version ${VERSION} from stable..."
+    echo "Downloading Vintage Story version ${VERSION} from stable..."
     DOWNLOAD_URL="$STABLE_FULL_URL"
 elif wget --spider -q "$UNSTABLE_FULL_URL" 2>/dev/null; then
-    echo "Downloading Vintage Story Server version ${VERSION} from unstable..."
+    echo "Downloading Vintage Story version ${VERSION} from unstable..."
     DOWNLOAD_URL="$UNSTABLE_FULL_URL"
 else
     echo "ERROR: Version ${VERSION} not found in either stable or unstable channels"
