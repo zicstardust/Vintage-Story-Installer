@@ -61,7 +61,7 @@ cd "$GAME_DIR"
 
 if [ -d "$GAME_DIR/vintagestory" ]; then
     echo "Removing existent folder..."
-    rm -Rf "$GAME_DIR/vintagestory"
+    bash "$GAME_DIR/vintagestory/uninstall.sh"
 fi
 
 wget -q ${DOWNLOAD_URL}
@@ -83,12 +83,15 @@ wget -q https://builds.dotnet.microsoft.com/dotnet/Runtime/${DOTNET_VERSION}/dot
 tar xf dotnet-runtime-${DOTNET_VERSION}-linux-${ARCH}.tar.gz
 rm -f dotnet-runtime-${DOTNET_VERSION}-linux-${ARCH}.tar.gz
 
+DESKTOP_ENTRY_NAME=$(echo $GAME_DIR | sed 's|/||g')
 
 #uninstaller
 cat > "$GAME_DIR/vintagestory/uninstall.sh" <<UNINSTALLER
 #!/bin/bash
 rm -Rf "$GAME_DIR/vintagestory"
-rm -f \$HOME/.local/share/applications/vintagestory.desktop 
+rm -f $HOME/.local/share/applications/vintagestory${DESKTOP_ENTRY_NAME}.desktop 
+rm -f $HOME/.local/share/applications/Vintagestory_url_connect${DESKTOP_ENTRY_NAME}.desktop
+rm -f $HOME/.local/share/applications/Vintagestory_url_mod${DESKTOP_ENTRY_NAME}.desktop
 
 UNINSTALLER
 chmod +x "$GAME_DIR/vintagestory/uninstall.sh"
@@ -97,32 +100,30 @@ chmod +x "$GAME_DIR/vintagestory/uninstall.sh"
 #update
 cat > "$GAME_DIR/vintagestory/update.sh" <<UPDATER
 #!/bin/bash
+export GAME_DIR="${GAME_DIR}"
+export GAME_DATA="${GAME_DATA}"
 export INTERACTIVE=1
 curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh | bash
 
 UPDATER
 chmod +x "$GAME_DIR/vintagestory/update.sh"
 
-
-if [ -f "$HOME/.local/share/applications/vintagestory.desktop" ]; then
-    echo "Removing existent shortcut..."
-    rm -f "$HOME/.local/share/applications/vintagestory.desktop"
-fi
-
 #Create desktop shortcut
 mkdir -p $HOME/.local/share/applications/
-cat > $HOME/.local/share/applications/vintagestory.desktop <<DESKTOP
+cat > $HOME/.local/share/applications/vintagestory${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
+#!/usr/bin/xdg-open
 [Desktop Entry]
 Categories=Game;
 Comment=Wilderness survival sandbox game
 Encoding=UTF-8
 Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" ${GAME_DIR}/vintagestory/run.sh --dataPath "${GAME_DATA_DIR}"
-GenericName=Vintage Story
+GenericName=Sandbox Game
 Icon=${GAME_DIR}/vintagestory/assets/gameicon.xpm
-Name=Vintage Story
+Name=Vintage Story ${VERSION}
 NoDisplay=false
 Path=${GAME_DIR}/vintagestory
-StartupNotify=true
+StartupNotify=false
+Type=Application
 Terminal=false
 Actions=Uninstall;Update;
 [Desktop Action Uninstall]
@@ -135,3 +136,31 @@ Terminal=true
 DESKTOP
 
 
+cat > $HOME/.local/share/applications/Vintagestory_url_connect${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
+#!/usr/bin/xdg-open
+[Desktop Entry]
+Name=Vintage Story URI connect ${VERSION}
+Exec=bash -c "export DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" && ${GAME_DIR}/vintagestory/Vintagestory --dataPath "${GAME_DATA_DIR}" -c %U"
+Terminal=false
+NoDisplay=true
+Type=Application
+StartupNotify=false
+Categories=Game;
+Path=${GAME_DIR}/vintagestory
+MimeType=x-scheme-handler/vintagestoryjoin;
+DESKTOP
+
+
+cat > $HOME/.local/share/applications/Vintagestory_url_mod${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
+#!/usr/bin/xdg-open
+[Desktop Entry]
+Name=Vintage Story URI mod install ${VERSION}
+Exec=bash -c "export DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" && ${GAME_DIR}/vintagestory/Vintagestory --dataPath "${GAME_DATA_DIR}" -i %U"
+Terminal=false
+NoDisplay=true
+Type=Application
+StartupNotify=false
+Categories=Game;
+Path=${GAME_DIR}/vintagestory
+MimeType=x-scheme-handler/vintagestorymodinstall;
+DESKTOP
