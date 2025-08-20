@@ -1,4 +1,5 @@
-# Vintage Story Linux Instaler
+# Vintage Story Linux Installer
+Install any version of vintage story on linux with .net included
 
 ## Dependencies
 - wget
