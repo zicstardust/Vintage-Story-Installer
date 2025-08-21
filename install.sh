@@ -101,7 +101,7 @@ chmod +x "$GAME_DIR/vintagestory/uninstall.sh"
 cat > "$GAME_DIR/vintagestory/update.sh" <<UPDATER
 #!/bin/bash
 export GAME_DIR="${GAME_DIR}"
-export GAME_DATA="${GAME_DATA}"
+export GAME_DATA_DIR="${GAME_DATA_DIR}"
 export INTERACTIVE=1
 curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh > /tmp/vs_installer.sh
 bash /tmp/vs_installer.sh
