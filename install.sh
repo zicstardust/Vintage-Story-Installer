@@ -103,7 +103,9 @@ cat > "$GAME_DIR/vintagestory/update.sh" <<UPDATER
 export GAME_DIR="${GAME_DIR}"
 export GAME_DATA="${GAME_DATA}"
 export INTERACTIVE=1
-curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh | bash
+curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh > /tmp/vs_installer.sh
+bash /tmp/vs_installer.sh
+rm -f /tmp/vs_installer.sh
 
 UPDATER
 chmod +x "$GAME_DIR/vintagestory/update.sh"
