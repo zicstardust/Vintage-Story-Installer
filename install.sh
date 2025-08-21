@@ -3,7 +3,7 @@ DEFAULT_VERSION="1.20.12"
 DEFAULT_GAME_DIR="$HOME/.local/share"
 DEFAULT_GAME_DATA_DIR="$HOME/.config/VintagestoryData"
 
-if [ "$INTERACTIVE" == "1" ]; then
+if [[ "$INTERACTIVE" -eq 1 ]]; then
     if [[ -z "$VERSION" ]]; then
         read -r -p "Which version will be installed [Default: ${DEFAULT_VERSION}]: " VERSION
     fi
