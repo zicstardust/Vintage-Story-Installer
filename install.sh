@@ -96,7 +96,7 @@ rm -f $HOME/.local/share/applications/Vintagestory_url_mod${DESKTOP_ENTRY_NAME}.
 UNINSTALLER
 chmod +x "$GAME_DIR/vintagestory/uninstall.sh"
 
-
+: '
 #update
 cat > "$GAME_DIR/vintagestory/update.sh" <<UPDATER
 #!/bin/bash
@@ -106,10 +106,9 @@ export INTERACTIVE=1
 curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh > /tmp/vs_installer.sh
 bash /tmp/vs_installer.sh
 rm -f /tmp/vs_installer.sh
-
 UPDATER
 chmod +x "$GAME_DIR/vintagestory/update.sh"
-
+'
 #Create desktop shortcut
 mkdir -p $HOME/.local/share/applications/
 cat > $HOME/.local/share/applications/vintagestory${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
@@ -127,16 +126,18 @@ Path=${GAME_DIR}/vintagestory
 StartupNotify=false
 Type=Application
 Terminal=false
-Actions=Uninstall;Update;
+Actions=Uninstall;
 [Desktop Action Uninstall]
 Name=Uninstall
 Exec=${GAME_DIR}/vintagestory/uninstall.sh
+DESKTOP
+: '
 [Desktop Action Update]
 Name=Update/Change Version
 Exec=${GAME_DIR}/vintagestory/update.sh
 Terminal=true
 DESKTOP
-
+'
 
 cat > $HOME/.local/share/applications/Vintagestory_url_connect${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
 #!/usr/bin/xdg-open
