@@ -15,7 +15,7 @@ Open any shell and execute:
 #export GAME_DIR="/path/to/install" #set specific game install directory
 #export GAME_DATA="/path/to/data" #set specific game data directory
 #export INTERACTIVE=1 #set "1" to interactive setup
-curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh > /tmp/vs_installer.sh; bash /tmp/vs_installer.sh; rm -f /tmp/vs_installer.sh
+curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh > /tmp/vs_installer.sh; bash /tmp/vs_installer.sh
 ```
 
 

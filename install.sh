@@ -105,11 +105,11 @@ export GAME_DATA_DIR="${GAME_DATA_DIR}"
 export INTERACTIVE=1
 curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/install.sh > /tmp/vs_installer.sh
 bash /tmp/vs_installer.sh
-rm -f /tmp/vs_installer.sh
 UPDATER
 chmod +x "$GAME_DIR/vintagestory/update.sh"
 '
-#Create desktop shortcut
+
+#Create Desktop Entry
 mkdir -p $HOME/.local/share/applications/
 cat > $HOME/.local/share/applications/vintagestory${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
 #!/usr/bin/xdg-open
@@ -117,7 +117,7 @@ cat > $HOME/.local/share/applications/vintagestory${DESKTOP_ENTRY_NAME}.desktop 
 Categories=Game;
 Comment=Wilderness survival sandbox game
 Encoding=UTF-8
-Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" ${GAME_DIR}/vintagestory/run.sh --dataPath "${GAME_DATA_DIR}"
+Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" "${GAME_DIR}/vintagestory/run.sh" --dataPath "${GAME_DATA_DIR}"
 GenericName=Sandbox Game
 Icon=${GAME_DIR}/vintagestory/assets/gameicon.xpm
 Name=Vintage Story ${VERSION}
@@ -131,19 +131,13 @@ Actions=Uninstall;
 Name=Uninstall
 Exec=${GAME_DIR}/vintagestory/uninstall.sh
 DESKTOP
-: '
-[Desktop Action Update]
-Name=Update/Change Version
-Exec=${GAME_DIR}/vintagestory/update.sh
-Terminal=true
-DESKTOP
-'
+
 
 cat > $HOME/.local/share/applications/Vintagestory_url_connect${DESKTOP_ENTRY_NAME}.desktop <<DESKTOP
 #!/usr/bin/xdg-open
 [Desktop Entry]
 Name=Vintage Story URI connect ${VERSION}
-Exec=bash -c "export DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" && ${GAME_DIR}/vintagestory/Vintagestory --dataPath "${GAME_DATA_DIR}" -c %U"
+Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" "${GAME_DIR}/vintagestory/Vintagestory" --dataPath "${GAME_DATA_DIR}" -c %U"
 Terminal=false
 NoDisplay=true
 Type=Application
@@ -158,7 +152,7 @@ cat > $HOME/.local/share/applications/Vintagestory_url_mod${DESKTOP_ENTRY_NAME}.
 #!/usr/bin/xdg-open
 [Desktop Entry]
 Name=Vintage Story URI mod install ${VERSION}
-Exec=bash -c "export DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" && ${GAME_DIR}/vintagestory/Vintagestory --dataPath "${GAME_DATA_DIR}" -i %U"
+Exec=env DOTNET_ROOT="${GAME_DIR}/vintagestory/dotnet" PATH="\$PATH:${GAME_DIR}/vintagestory/dotnet" "${GAME_DIR}/vintagestory/Vintagestory" --dataPath "${GAME_DATA_DIR}" -i %U"
 Terminal=false
 NoDisplay=true
 Type=Application
