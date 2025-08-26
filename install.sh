@@ -30,11 +30,6 @@ if [[ -z "$GAME_DATA_DIR" ]]; then
     GAME_DATA_DIR=${GAME_DATA_DIR:-${DEFAULT_GAME_DATA_DIR}}
 fi
 
-if awk "BEGIN {exit !($VERSION <= 1.21.0)}"; then
-    DOTNET_VERSION="7.0.20"
-else
-    DOTNET_VERSION="8.0.19"
-fi
 
 STABLE_URL="https://cdn.vintagestory.at/gamefiles/stable/vs_client_linux-x64_"
 UNSTABLE_URL="https://cdn.vintagestory.at/gamefiles/unstable/vs_client_linux-x64_"
@@ -72,6 +67,12 @@ mkdir -p "$GAME_DIR/vintagestory/dotnet"
 cd "$GAME_DIR/vintagestory/dotnet"
 
 #download .NET
+if awk "BEGIN {exit !($VERSION < 1.21)}"; then
+    DOTNET_VERSION="7.0.20"
+else
+    DOTNET_VERSION="8.0.19"
+fi
+
 if [[ $(uname -m) == "aarch64" ]]; then
   ARCH="arm64"
 else
