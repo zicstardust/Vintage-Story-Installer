@@ -47,8 +47,15 @@ if ($version -lt "1.21.0"){
 
 
 function Install-DotNet {
-    $url="https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/$($dotnet_desktop_version)/windowsdesktop-runtime-$($dotnet_desktop_version)-win-x64.exe"
-    $dest="$($env:TEMP)\windowsdesktop-runtime-$($dotnet_desktop_version)-win-x64.exe"
+
+    if ($env:PROCESSOR_ARCHITECTURE -eq "AMD64"){
+        $arch="x64"
+    } else {
+        $arch="arm64"
+    }
+
+    $url="https://builds.dotnet.microsoft.com/dotnet/WindowsDesktop/$($dotnet_desktop_version)/windowsdesktop-runtime-$($dotnet_desktop_version)-win-$($arch).exe"
+    $dest="$($env:TEMP)\windowsdesktop-runtime-$($dotnet_desktop_version)-win-$($arch).exe"
     Write-Output "Downloading .NET Desktop Runtime $($dotnet_desktop_version)..."
     Invoke-WebRequest -Uri $url -OutFile $dest
     Write-Output "Installing .NET Desktop Runtime $($dotnet_desktop_version)..."
