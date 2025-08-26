@@ -23,7 +23,7 @@ curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/
 
 | variables | Function | Default |
 | :----: | --- | --- |
-| `VERSION` | Set game version | 1.20.12 |
+| `VERSION` | Set game version | 1.21.0 |
 | `GAME_DIR` | Set game install directory | $HOME/.local/share |
 | `GAME_DATA` | Set game data directory | $HOME/.config |
 | `INTERACTIVE` | set `1` to interactive setup | |
@@ -46,7 +46,7 @@ Invoke-Expression (new-object Net.Webclient).DownloadString('https://raw.githubu
 
 | variables | Function | Default |
 | :----: | --- | --- |
-| `$env:VERSION` | Set game version | 1.20.12 |
+| `$env:VERSION` | Set game version | 1.21.0 |
 | `$env:GAME_DIR` | Set game install directory | $env:APPDATA |
 | `$env:GAME_DATA` | Set game data directory | $env:APPDATA |
 | `$env:INTERACTIVE` | set `1` to interactive setup | |

@@ -1,5 +1,5 @@
 #!/bin/bash
-DEFAULT_VERSION="1.20.12"
+DEFAULT_VERSION="1.21.0"
 DEFAULT_GAME_DIR="$HOME/.local/share"
 DEFAULT_GAME_DATA_DIR="$HOME/.config/VintagestoryData"
 

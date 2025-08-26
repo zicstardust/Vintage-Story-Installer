@@ -1,5 +1,5 @@
 $ErrorActionPreference= 'silentlycontinue'
-$DEFAULT_VERSION="1.20.12"
+$DEFAULT_VERSION="1.21.0"
 $DEFAULT_GAME_DIR="$env:APPDATA"
 $DEFAULT_GAME_DATA_DIR="$env:APPDATA\VintagestoryData"
 
