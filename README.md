@@ -22,7 +22,7 @@ curl https://raw.githubusercontent.com/zicstardust/Vintage-Story-Installer/main/
 
 | variables | Function | Default |
 | :----: | --- | --- |
-| `VERSION` | Set game version | 1.21.5 |
+| `VERSION` | Set game version | 1.21.6 |
 | `GAME_DIR` | Set game install directory | $HOME/.local/share |
 | `GAME_DATA` | Set game data directory | $HOME/.config |
 | `INTERACTIVE` | set `1` to interactive setup | |
