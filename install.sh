@@ -69,8 +69,10 @@ cd "$GAME_DIR/vintagestory/dotnet"
 #download .NET
 if awk "BEGIN {exit !($VERSION < 1.21)}"; then
     DOTNET_VERSION="7.0.20"
+elif [[ "$VERSION" == 1.21* ]]; then 
+    DOTNET_VERSION="8.0.24"
 else
-    DOTNET_VERSION="8.0.22"
+    DOTNET_VERSION="10.0.3"
 fi
 
 if [[ $(uname -m) == "aarch64" ]]; then
